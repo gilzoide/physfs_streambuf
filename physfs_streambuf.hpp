@@ -139,6 +139,10 @@ protected:
 	}
 
 	int sync() override {
+		if (!file) {
+			return -1;
+		}
+
 		std::ptrdiff_t chars_to_write = this->pptr() - this->pbase();
 		if (chars_to_write > 0) {
 			std::ptrdiff_t bytes_to_write = chars_to_write * sizeof(char_type);
